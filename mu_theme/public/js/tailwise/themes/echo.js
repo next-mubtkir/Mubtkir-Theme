@@ -26,7 +26,10 @@
         }
       }
     });
-    new SimpleBar($(".scrollable-ref").first()[0]);
+    const scrollableElement = $(".scrollable-ref").first()[0];
+    if (scrollableElement && typeof SimpleBar !== "undefined") {
+      new SimpleBar(scrollableElement);
+    }
     const backgroundMode = () => {
       if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
         $(".background").first().addClass("background--hidden");
@@ -97,7 +100,7 @@
       if (window.innerWidth <= 1600) {
         localStorage.setItem("compactMenu", "true");
         $(".side-menu").first().addClass("side-menu--collapsed");
-        $(".content").f;
+        $(".content").first().addClass("content--compact");
       }
     };
   })();
