@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  {% set theme_settings = frappe.get_doc("Theme Settings", "Theme Settings") %}
+  <title>{{ theme_settings.title or "Mubtkir" }}</title>
+
+  <link
+    rel="icon"
+    href=" {{ theme_settings.favicon_image or "./assets/mu_theme/images/small_icon.ico" }}"
+    type="image/png"
+  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+
+  {% block styles %}{% endblock %}
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== TOP NAVBAR ===== */
+    .login-navbar {
+      background: #ffffff;
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .login-navbar .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .login-navbar .brand img {
+      width: 38px;
+      height: 38px;
+    }
+
+    .login-navbar .brand-text {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #5c3bbd, #0ea5c6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .login-page-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: stretch;
+      min-height: calc(100vh - 66px);
+    }
+
+    /* ===== LEFT PANEL ===== */
+    .login-left {
+      flex: 1;
+      background: #f8f9fb;
+      padding: 60px 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-left::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: -80px;
+      width: 350px;
+      height: 350px;
+      background: linear-gradient(135deg, rgba(92,59,189,0.06), rgba(14,165,198,0.06));
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .login-left::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: -60px;
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(135deg, rgba(14,165,198,0.05), rgba(92,59,189,0.05));
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .left-badge {
+      display: inline-block;
+      background: rgba(14,165,198,0.12);
+      color: #0ea5c6;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .left-headline {
+      font-size: 36px;
+      font-weight: 800;
+      color: #1a1a2e;
+      line-height: 1.25;
+      margin-bottom: 20px;
+      max-width: 500px;
+    }
+
+    .left-subtext {
+      font-size: 15px;
+      color: #6b7280;
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    /* Dashboard screenshot card */
+    .dashboard-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+      overflow: hidden;
+      width: 100%;
+      max-width: 560px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dashboard-card .card-header-bar {
+      background: #1e1e3f;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-header-bar .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .card-header-bar .dot.red { background: #ff5f57; }
+    .card-header-bar .dot.yellow { background: #ffbd2e; }
+    .card-header-bar .dot.green { background: #28c840; }
+
+    .dashboard-card .card-body {
+      padding: 20px;
+      background: #f8f9fb;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-box {
+      flex: 1;
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .stat-box .stat-label {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .stat-box .stat-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    .stat-box .stat-change {
+      font-size: 11px;
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    .chart-placeholder {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .chart-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 60px;
+    }
+
+    .chart-bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      background: linear-gradient(180deg, #5c3bbd, #0ea5c6);
+      opacity: 0.7;
+    }
+
+    /* Feature pills */
+    .features-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #374151;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .feature-pill i {
+      color: #5c3bbd;
+    }
+
+    /* ===== RIGHT PANEL ===== */
+    .login-right {
+      width: 420px;
+      min-width: 380px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px 44px;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.06);
+    }
+
+    .login-right .form-logo {
+      width: 52px;
+      height: 52px;
+      margin-bottom: 10px;
+    }
+
+    .login-right .form-brand-name {
+      font-size: 16px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #5c3bbd, #0ea5c6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 28px;
+    }
+
+    .login-right h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .login-right .welcome-text {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 32px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ===== FOOTER ===== */
+    .login-footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 12px;
+      color: #9ca3af;
+      background: #fff;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    /* ===== LANGUAGE PICKER IN NAVBAR ===== */
+    .lang-picker-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .lang-picker-wrapper .btn,
+    .lang-picker-wrapper button {
+      font-size: 13px;
+      font-weight: 500;
+      color: #374151;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .lang-picker-wrapper .btn:hover,
+    .lang-picker-wrapper button:hover {
+      background: #e5e7eb;
+    }
+
+    .lang-picker-wrapper .dropdown-menu {
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      border: 1px solid #e5e7eb;
+      padding: 6px;
+      min-width: 140px;
+    }
+
+    .lang-picker-wrapper .dropdown-item {
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .login-left { display: none; }
+      .login-right {
+        width: 100%;
+        min-width: unset;
+        box-shadow: none;
+      }
+    }
+  </style>
+
+  <script>
+    window.frappe = {};
+    frappe.ready_events = [];
+    frappe.ready = function (fn) {
+      frappe.ready_events.push(fn);
+    }
+    window.dev_server = {{ dev_server }};
+    window.socketio_port = {{ (frappe.socketio_port or 'null') }};
+    window.show_language_picker = {{ show_language_picker or 'false' }};
+  </script>
+</head>
+
+<body>
+
+  <!-- TOP NAVBAR -->
+  <nav class="login-navbar">
+    <a href="/" class="brand">
+      <img src="/assets/mu_theme/images/logo.png" onerror="this.src='/assets/mu_theme/images/small_icon.ico'" alt="MUBTKIR ERP Logo" />
+      <span class="brand-text">MUBTKIR ERP</span>
+    </a>
+    {% if show_language_picker %}
+    <div class="lang-picker-wrapper">
+      {{ language_picker | safe }}
+    </div>
+    {% endif %}
+  </nav>
+
+  <!-- MAIN WRAPPER -->
+  <div class="login-page-wrapper">
+
+    <!-- LEFT: Marketing Panel -->
+    <div class="login-left">
+      <span class="left-badge">نظام متكامل لإدارة أعمالك</span>
+      <h1 class="left-headline">حلول ذكية لإدارة أعمالك<br>بسهولة وكفاءة</h1>
+      <p class="left-subtext">
+        MUBTKIR ERP نظام تخطيط موارد المؤسسات يساعد الشركات على أتمتة العمليات اليومية، وتحسين الكفاءة، وتقليل التكاليف من خلال منصة واحدة متكاملة وسهلة الاستخدام.
+      </p>
+
+      <!-- Mini Dashboard Preview -->
+      <div class="dashboard-card">
+        <div class="card-header-bar">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-label">إجمالي المبيعات</div>
+              <div class="stat-value">32,560</div>
+              <div class="stat-change">+12.5%</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">الطلبات</div>
+              <div class="stat-value">12,450</div>
+              <div class="stat-change">+8.2%</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">العملاء</div>
+              <div class="stat-value">4,230</div>
+              <div class="stat-change">+5.1%</div>
+            </div>
+          </div>
+          <div class="chart-placeholder">
+            <div class="chart-title">المبيعات</div>
+            <div class="chart-bars">
+              <div class="chart-bar" style="height:40%"></div>
+              <div class="chart-bar" style="height:65%"></div>
+              <div class="chart-bar" style="height:50%"></div>
+              <div class="chart-bar" style="height:80%"></div>
+              <div class="chart-bar" style="height:60%"></div>
+              <div class="chart-bar" style="height:90%"></div>
+              <div class="chart-bar" style="height:75%"></div>
+              <div class="chart-bar" style="height:85%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Pills -->
+      <div class="features-row">
+        <div class="feature-pill"><i class="fa fa-chart-bar"></i> تقارير وتحليلات</div>
+        <div class="feature-pill"><i class="fa fa-dollar-sign"></i> إدارة مالية</div>
+        <div class="feature-pill"><i class="fa fa-boxes"></i> إدارة المخزون</div>
+        <div class="feature-pill"><i class="fa fa-users"></i> إدارة العملاء</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Login Form -->
+    <div class="login-right">
+      <img
+        class="form-logo"
+        src="/assets/mu_theme/images/logo.png"
+        onerror="this.src='/assets/mu_theme/images/small_icon.ico'"
+        alt="MUBTKIR ERP"
+      />
+      <div class="form-brand-name">MUBTKIR ERP</div>
+
+      {% block content %}{% endblock %}
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="login-footer">
+    © 2024 MUBTKIR ERP. جميع الحقوق محفوظة.
+  </footer>
+
+  {% block base_scripts %}
+  <!-- js should be loaded in body! -->
+  <script>
+    frappe.boot = {{ boot | json }}
+    frappe.sys_defaults = frappe.boot.sysdefaults;
+  </script>
+  {{ include_script('frappe-web.bundle.js') }} {% endblock %}
+  {%- for link in web_include_js %}
+  {{ include_script(link) }}
+  {%- endfor -%} {%- block script%}
+
+  {% if colocated_js -%}
+  <script>
+  {
+    {
+      colocated_js;
+    }
+  }
+  </script>
+  {%- endif %}
+  {%- endblock %}
+  <!-- csrf_token -->
+  {%- block body_include %}{{ body_include or "" }}{% endblock -%}
+  {% block scripts %}{% endblock %}
+</body>
+</html>
