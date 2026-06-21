@@ -19,6 +19,320 @@
         <img src="/assets/mu_theme/images/mubtkir-logo.png" alt="MUBTKIR ERP" onerror="this.style.display='none'">
         <strong>MUBTKIR <span>ERP</span></strong>
       </div>
+line-height: 1.6;
+}
+
+.stats {
+  padding: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stats > div {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.stats span {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--soft-gradient);
+}
+
+.stats b {
+  display: block;
+  color: var(--blue);
+  font-size: 20px;
+}
+
+.stats small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.compatible,
+.social {
+  padding: 16px;
+  text-align: center;
+}
+
+.compatible h3,
+.social h3 {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+
+.compatible-logos,
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.compatible-logos img {
+  max-width: 130px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.social-icons a {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--panel2);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.social strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--blue);
+}
+
+.copyright {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Tablet */
+@media (max-width: 1180px) {
+  .mub-page,
+  .mub-page.en,
+  .mub-page:not(.en) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "login"
+      "info";
+  }
+
+  .login-side {
+    min-height: auto;
+    border: 0 !important;
+  }
+
+  .info-side {
+    padding: 18px;
+  }
+
+  .hero-layout,
+  .mub-page:not(.en) .hero-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "visual";
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .hero-title {
+    justify-content: center;
+    font-size: 38px;
+  }
+
+  .hero-description {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .features,
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .login-side,
+  .info-side {
+    padding: 10px;
+  }
+
+  .contact-card {
+    display: none;
+  }
+
+  .features,
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .erp-window {
+    width: 100%;
+    height: 195px;
+    transform: none;
+  }
+
+  .login-options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>
+
+<script>
+let currentLang = localStorage.getItem("mub_lang") || "ar";
+let currentTheme = localStorage.getItem("mub_theme") || "light";
+
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem("mub_lang", lang);
+
+  const page = document.getElementById("mubPage");
+  const langBtn = document.getElementById("langBtn");
+  const userInput = document.getElementById("login_user");
+  const passInput = document.getElementById("login_password");
+
+  page.classList.toggle("en", lang === "en");
+
+  document.documentElement.setAttribute("lang", lang);
+  document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+  document.querySelectorAll("[data-ar][data-en]").forEach(function(el) {
+    el.textContent = lang === "ar" ? el.dataset.ar : el.dataset.en;
+  });
+
+  langBtn.textContent = lang === "ar" ? "English" : "العربية";
+
+  userInput.placeholder = lang === "ar"
+    ? "أدخل رقم الجوال أو اسم المستخدم"
+    : "Enter mobile number or username";
+
+  passInput.placeholder = lang === "ar"
+    ? "أدخل كلمة المرور"
+    : "Enter password";
+}
+
+function toggleLang() {
+  applyLang(currentLang === "ar" ? "en" : "ar");
+}
+
+function applyTheme(theme) {
+  currentTheme = theme;
+  localStorage.setItem("mub_theme", theme);
+
+  document.getElementById("mubPage").classList.toggle("dark", theme === "dark");
+  document.getElementById("themeBtn").textContent = theme === "dark" ? "☀️" : "🌙";
+}
+
+function toggleTheme() {
+  applyTheme(currentTheme === "dark" ? "light" : "dark");
+}
+
+function togglePassword() {
+  const input = document.getElementById("login_password");
+  const btn = document.getElementById("passwordToggle");
+
+  input.type = input.type === "password" ? "text" : "password";
+  btn.textContent = input.type === "password" ? "👁" : "🙈";
+}
+
+function loadRememberedCredentials() {
+  const remember = localStorage.getItem("mub_remember") === "1";
+  document.getElementById("rememberMe").checked = remember;
+
+  if (remember) {
+    document.getElementById("login_user").value = localStorage.getItem("mub_saved_user") || "";
+    document.getElementById("login_password").value = localStorage.getItem("mub_saved_password") || "";
+  }
+}
+
+function updateRememberedCredentials() {
+  const remember = document.getElementById("rememberMe").checked;
+
+  if (remember) {
+    localStorage.setItem("mub_remember", "1");
+    localStorage.setItem("mub_saved_user", document.getElementById("login_user").value || "");
+    localStorage.setItem("mub_saved_password", document.getElementById("login_password").value || "");
+  } else {
+    localStorage.removeItem("mub_remember");
+    localStorage.removeItem("mub_saved_user");
+    localStorage.removeItem("mub_saved_password");
+  }
+}
+
+document.getElementById("rememberMe").addEventListener("change", updateRememberedCredentials);
+
+document.getElementById("login_form").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const usr = document.getElementById("login_user").value.trim();
+  const pwd = document.getElementById("login_password").value;
+  const errorBox = document.getElementById("login_error");
+  const submitButton = document.querySelector(".login-button");
+
+  errorBox.textContent = "";
+
+  if (!usr || !pwd) {
+    errorBox.textContent = currentLang === "ar"
+      ? "يرجى إدخال اسم المستخدم وكلمة المرور"
+      : "Please enter your username and password";
+    return;
+  }
+
+  updateRememberedCredentials();
+  submitButton.disabled = true;
+
+  try {
+    const response = await fetch("/api/method/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ usr: usr, pwd: pwd })
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.message === "Logged In") {
+      const params = new URLSearchParams(window.location.search);
+      window.location.href = params.get("redirect-to") || "/app";
+      return;
+    }
+
+    errorBox.textContent = currentLang === "ar"
+      ? "بيانات الدخول غير صحيحة"
+      : "Invalid login details";
+
+  } catch (error) {
+    errorBox.textContent = currentLang === "ar"
+      ? "تعذر الاتصال بالخادم، حاول مرة أخرى"
+      : "Could not connect to the server. Please try again";
+  } finally {
+    submitButton.disabled = false;
+  }
+});
+
+applyTheme(currentTheme);
+applyLang(currentLang);
+loadRememberedCredentials();
+</script>
+
+{% endblock %}
 
       <h2 class="welcome-title">
         <span>👋</span>
