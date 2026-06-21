@@ -236,5 +236,5 @@ doctype_js = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 website_route_rules = [
-    {"from_route": "/login", "to_route": "mu_theme/login"},
+    {"from_route": "/login", "to_route": "mubtkir-login"}
 ]
