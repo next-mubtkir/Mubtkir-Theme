@@ -1,0 +1,1280 @@
+{% extends "templates/web.html" %}
+
+{% block title %}MUBTKIR ERP Login{% endblock %}
+
+{% block page_content %}
+
+<div class="mub-page" id="mubPage">
+
+  <aside class="login-side">
+
+    <div class="toolbar-card">
+      <button type="button" class="tool-button" id="themeBtn" onclick="toggleTheme()">🌙</button>
+      <button type="button" class="tool-button language-button" id="langBtn" onclick="toggleLang()">English</button>
+    </div>
+
+    <div class="login-card">
+
+      <div class="login-brand">
+        <img src="/assets/mu_theme/images/mubtkir-logo.png" alt="MUBTKIR ERP" onerror="this.style.display='none'">
+        <strong>MUBTKIR <span>ERP</span></strong>
+      </div>
+
+      <h2 class="welcome-title">
+        <b data-ar="مرحباً بك مجدداً" data-en="Welcome Back">مرحباً بك مجدداً</b>
+        <span class="welcome-emoji">👋</span>
+      </h2>
+
+      <p class="welcome-description"
+         data-ar="سجل الدخول للوصول إلى حسابك ومتابعة أعمالك"
+         data-en="Log in to access your account and continue your work">
+        سجل الدخول للوصول إلى حسابك ومتابعة أعمالك
+      </p>
+
+      <form id="login_form" autocomplete="on">
+
+        <label for="login_user" data-ar="رقم الجوال / اسم المستخدم" data-en="Mobile Number / Username">
+          رقم الجوال / اسم المستخدم
+        </label>
+
+        <div class="input-wrapper">
+          <span class="field-icon">👤</span>
+          <input id="login_user" name="username" type="text" autocomplete="username" placeholder="أدخل رقم الجوال أو اسم المستخدم">
+        </div>
+
+        <label for="login_password" data-ar="كلمة المرور" data-en="Password">
+          كلمة المرور
+        </label>
+
+        <div class="input-wrapper">
+          <span class="field-icon">🔒</span>
+          <input id="login_password" name="password" type="password" autocomplete="current-password" placeholder="أدخل كلمة المرور">
+          <button type="button" class="password-toggle" id="passwordToggle" onclick="togglePassword()">👁</button>
+        </div>
+
+        <div class="login-options">
+          <label class="remember-option">
+            <input type="checkbox" id="rememberMe">
+            <span data-ar="تذكرني" data-en="Remember me">تذكرني</span>
+          </label>
+
+          <a href="/forgot" class="forgot-password" data-ar="نسيت كلمة المرور؟" data-en="Forgot password?">
+            نسيت كلمة المرور؟
+          </a>
+        </div>
+
+        <button class="login-button" type="submit">
+          <span data-ar="تسجيل الدخول" data-en="Login">تسجيل الدخول</span>
+          <span>🔐</span>
+        </button>
+
+        <div id="login_error"></div>
+
+      </form>
+
+    </div>
+
+    <div class="contact-card">
+      <h3 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h3>
+
+      <div class="contact-links">
+        <a href="mailto:support@mubtkir.com">
+          <span>✉️</span>
+          <b>support@mubtkir.com</b>
+          <small data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</small>
+        </a>
+
+        <a href="tel:+966505098090">
+          <span>📞</span>
+          <b dir="ltr">+966 50 509 8090</b>
+          <small data-ar="اتصل بنا" data-en="Call Us">اتصل بنا</small>
+        </a>
+      </div>
+    </div>
+
+  </aside>
+
+  <section class="info-side">
+
+    <div class="hero-layout">
+
+      <div class="hero-copy">
+        <span class="badge" data-ar="نظام متكامل لإدارة أعمالك" data-en="Integrated system for your business">
+          نظام متكامل لإدارة أعمالك
+        </span>
+
+        <h1 class="hero-title">
+          <span data-ar="حلول" data-en="Smart">حلول</span>
+          <span class="gradient-text" data-ar="ذكية" data-en="solutions">ذكية</span>
+          <span data-ar="لإدارة أعمالك" data-en="to manage your business">لإدارة أعمالك</span>
+          <span data-ar="بسهولة وكفاءة" data-en="easily and efficiently">بسهولة وكفاءة</span>
+        </h1>
+
+        <p class="hero-description"
+           data-ar="نساعدك على أتمتة عملياتك اليومية، وتحسين الأداء، واتخاذ قرارات أفضل باستخدام تقارير وتحليلات دقيقة."
+           data-en="We help you automate daily operations, improve performance, and make better decisions using accurate reports and analytics.">
+          نساعدك على أتمتة عملياتك اليومية، وتحسين الأداء، واتخاذ قرارات أفضل باستخدام تقارير وتحليلات دقيقة.
+        </p>
+      </div>
+
+      <div class="erp-visual">
+        <div class="erp-window">
+          <div class="erp-header">
+            <span></span><span></span><span></span>
+            <b>ERPNext Desk</b>
+          </div>
+
+          <div class="erp-body">
+            <div class="erp-sidebar">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+
+            <div class="erp-content">
+              <div class="erp-topbar"></div>
+
+              <div class="erp-cards">
+                <div><small>Sales Invoice</small><b>60,540</b></div>
+                <div><small>Stock Balance</small><b>47,250</b></div>
+                <div><small>Net Profit</small><b>13,290</b></div>
+              </div>
+
+              <div class="erp-chart">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="features">
+      <article>
+        <div>👥</div>
+        <h3 data-ar="إدارة العملاء" data-en="Customer Management">إدارة العملاء</h3>
+        <p data-ar="تنظيم بيانات العملاء وتحسين تجربة البيع وخدمة العملاء." data-en="Organize customer data and improve sales and customer service.">
+          تنظيم بيانات العملاء وتحسين تجربة البيع وخدمة العملاء.
+        </p>
+      </article>
+
+      <article>
+        <div>📦</div>
+        <h3 data-ar="إدارة المخزون" data-en="Inventory Management">إدارة المخزون</h3>
+        <p data-ar="تتبع المخزون والمستودعات والمشتريات بسهولة ووضوح." data-en="Track inventory, warehouses, and purchases with ease.">
+          تتبع المخزون والمستودعات والمشتريات بسهولة ووضوح.
+        </p>
+      </article>
+
+      <article>
+        <div>💳</div>
+        <h3 data-ar="الإدارة المالية" data-en="Financial Management">الإدارة المالية</h3>
+        <p data-ar="إدارة الحسابات والفواتير والمدفوعات بتقارير مالية واضحة." data-en="Manage accounts, invoices, and payments with clear financial reports.">
+          إدارة الحسابات والفواتير والمدفوعات بتقارير مالية واضحة.
+        </p>
+      </article>
+
+      <article>
+        <div>📊</div>
+        <h3 data-ar="التقارير والتحليلات" data-en="Reports & Analytics">التقارير والتحليلات</h3>
+        <p data-ar="لوحات تحكم ومؤشرات فورية تساعدك على اتخاذ القرار." data-en="Dashboards and live indicators that support better decisions.">
+          لوحات تحكم ومؤشرات فورية تساعدك على اتخاذ القرار.
+        </p>
+      </article>
+    </div>
+
+    <div class="stats">
+      <div class="stat-item">
+        <span>💾</span>
+        <b>24/7</b>
+        <small data-ar="نسخ احتياطي يومي" data-en="Daily Backups">نسخ احتياطي يومي</small>
+      </div>
+
+      <div class="stat-item">
+        <span>👥</span>
+        <b>+5,000</b>
+        <small data-ar="مستخدم وأكثر" data-en="Users and more">مستخدم وأكثر</small>
+      </div>
+
+      <div class="stat-item">
+        <span>🛡️</span>
+        <b>99.9%</b>
+        <small data-ar="موثوقية النظام" data-en="System Reliability">موثوقية النظام</small>
+      </div>
+
+      <div class="stat-item">
+        <span>🤖</span>
+        <b>AI 24/7</b>
+        <small data-ar="دعم ذكي على مدار الساعة" data-en="AI support around the clock">دعم ذكي على مدار الساعة</small>
+      </div>
+    </div>
+
+    <div class="compatible">
+      <h3 data-ar="متوافق مع" data-en="Compatible with">متوافق مع</h3>
+
+      <div class="compatible-logos">
+        <img src="/assets/mu_theme/images/zatca-logo.png" alt="ZATCA" onerror="this.style.display='none'">
+        <img src="/assets/mu_theme/images/fatoora-logo.png" alt="Fatoora" onerror="this.style.display='none'">
+        <img src="/assets/mu_theme/images/saudi_business.png" alt="Saudi Business" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <div class="social">
+      <h3 data-ar="تابعنا" data-en="Follow Us">تابعنا</h3>
+
+      <div class="social-icons">
+
+        <a href="https://instagram.com/mubtkir" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24">
+            <defs>
+              <radialGradient id="igGrad" cx="30%" cy="107%" r="150%">
+                <stop offset="0%" stop-color="#fdf497"/>
+                <stop offset="45%" stop-color="#fd5949"/>
+                <stop offset="65%" stop-color="#d6249f"/>
+                <stop offset="100%" stop-color="#285AEB"/>
+              </radialGradient>
+            </defs>
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#igGrad)"/>
+            <circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/>
+          </svg>
+        </a>
+
+        <a href="https://x.com/mubtkir" target="_blank" aria-label="X">
+          <svg viewBox="0 0 24 24">
+            <path fill="#111" d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-7.4L6.3 22H3.1l7.3-8.4L2.8 2h6.4l4.4 6.7L18.9 2zm-1.1 17.8h1.7L8.2 4.1H6.4l11.4 15.7z"/>
+          </svg>
+        </a>
+
+        <a href="https://linkedin.com/company/mubtkir" target="_blank" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24">
+            <path fill="#0A66C2" d="M4.98 3.5A2.5 2.5 0 1 1 2.5 6a2.5 2.5 0 0 1 2.48-2.5zM3 8.98h4v12H3v-12zm7 0h3.8v1.64h.05a4.17 4.17 0 0 1 3.75-2.06c4.01 0 4.75 2.64 4.75 6.07V21h-4v-5.66c0-1.35-.03-3.08-1.88-3.08-1.88 0-2.17 1.47-2.17 2.98V21h-4V8.98z"/>
+          </svg>
+        </a>
+
+        <a href="https://facebook.com/mubtkir" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24">
+            <path fill="#1877F2" d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/>
+          </svg>
+        </a>
+
+        <a href="https://youtube.com/@mubtkir" target="_blank" aria-label="YouTube">
+          <svg viewBox="0 0 24 24">
+            <path fill="#FF0000" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8z"/>
+            <path fill="#fff" d="M9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/>
+          </svg>
+        </a>
+
+        <a href="https://tiktok.com/@mubtkir" target="_blank" aria-label="TikTok">
+          <svg viewBox="0 0 24 24">
+            <path fill="#25F4EE" d="M15.8 2c.4 2.7 2 4.4 4.9 4.6v3.1a8 8 0 0 1-4.8-1.6v6.8c0 4.1-2.8 6.4-6.2 6.4A6 6 0 0 1 3.6 15c0-4 3.2-6.6 7.1-5.9v3.3c-1.8-.5-3.7.6-3.7 2.6a2.7 2.7 0 0 0 2.8 2.7c1.6 0 2.7-1 2.7-3V2h3.3z"/>
+            <path fill="#FE2C55" d="M17.1 3.6c.9 1.6 2.2 2.5 4.1 2.7v3.1a8 8 0 0 1-4.8-1.6v6.8c0 4.1-2.8 6.4-6.2 6.4a6.1 6.1 0 0 1-4.5-1.9 6.4 6.4 0 0 0 5.3 2.8c3.4 0 6.2-2.3 6.2-6.4V8.7a8 8 0 0 0 4.8 1.6V7.2c-1.9-.2-3.2-1-4.1-2.7-.3-.5-.5-.8-.8-.9z"/>
+            <path fill="#111" d="M15.8 2v12.7c0 2-1.1 3-2.7 3A2.7 2.7 0 0 1 10.3 15c0-2 1.9-3.1 3.7-2.6V9.1C10.1 8.4 6.9 11 6.9 15a6 6 0 0 0 6.1 6.3c3.4 0 6.2-2.3 6.2-6.4V8.1A8 8 0 0 0 24 9.7V6.6C21.1 6.4 19.5 4.7 19.1 2h-3.3z"/>
+          </svg>
+        </a>
+
+      </div>
+
+      <strong>www.mubtkir.com</strong>
+    </div>
+
+    <div class="copyright">© 2026 MUBTKIR ERP</div>
+
+  </section>
+
+</div>
+
+<style>
+.navbar,
+.web-footer,
+footer {
+  display: none !important;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  font-family: Cairo, Tajawal, Arial, sans-serif;
+}
+
+.page-container,
+.page_content,
+.web-page-content,
+main,
+main .container,
+.container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.mub-page {
+  --bg: #eef4fd;
+  --panel: rgba(255, 255, 255, .95);
+  --panel2: #f8fbff;
+  --text: #0b1b55;
+  --muted: #6f7d99;
+  --border: #d9e4f0;
+  --purple: #7445ba;
+  --blue: #2d73c6;
+  --cyan: #13a9c8;
+  --gradient: linear-gradient(90deg, #7445ba, #5564bd, #2d73c6, #13a9c8);
+  --soft-gradient: linear-gradient(135deg, rgba(116,69,186,.12), rgba(45,115,198,.10), rgba(19,169,200,.12));
+  --shadow: 0 16px 38px rgba(25, 57, 111, .11);
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(116,69,186,.10), transparent 30%),
+    radial-gradient(circle at 90% 88%, rgba(19,169,200,.12), transparent 32%),
+    var(--bg);
+
+  direction: ltr;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(360px, 31vw, 450px);
+  grid-template-areas: "info login";
+}
+
+.mub-page.en {
+  grid-template-columns: clamp(360px, 31vw, 450px) minmax(0, 1fr);
+  grid-template-areas: "login info";
+}
+
+.mub-page.dark {
+  --bg: #08162d;
+  --panel: rgba(14, 31, 58, .96);
+  --panel2: #0d203c;
+  --text: #fff;
+  --muted: #c2ccdd;
+  --border: rgba(255,255,255,.14);
+  --shadow: 0 18px 40px rgba(0,0,0,.32);
+}
+
+.login-side {
+  grid-area: login;
+  direction: rtl;
+  min-width: 0;
+  min-height: 100vh;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-inline-start: 1px solid var(--border);
+  background: rgba(255,255,255,.25);
+}
+
+.mub-page.en .login-side {
+  direction: ltr;
+  border-inline-start: 0;
+  border-inline-end: 1px solid var(--border);
+}
+
+.info-side {
+  grid-area: info;
+  direction: rtl;
+  min-width: 0;
+  padding: clamp(22px, 3vw, 42px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mub-page.en .info-side {
+  direction: ltr;
+}
+
+.toolbar-card {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.tool-button {
+  min-height: 42px;
+  min-width: 52px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  font-family: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.language-button {
+  min-width: 112px;
+}
+
+.login-card,
+.contact-card,
+.features article,
+.stats,
+.compatible,
+.social {
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.login-card {
+  padding: clamp(22px, 2.4vw, 34px);
+}
+
+.login-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  direction: ltr;
+  margin-bottom: 18px;
+}
+
+.login-brand img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.login-brand strong {
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 900;
+  color: var(--text);
+}
+
+.login-brand span,
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.welcome-title {
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text);
+  text-align: center;
+  font-size: clamp(25px, 2.1vw, 34px);
+  font-weight: 900;
+}
+
+.welcome-description {
+  margin: 0 0 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.login-card label {
+  display: block;
+  margin: 14px 0 7px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 900;
+  text-align: start;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input {
+  width: 100%;
+  height: 52px;
+  padding-inline: 48px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: transparent;
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  text-align: start;
+}
+
+.input-wrapper input:focus {
+  border-color: rgba(19,169,200,.80);
+  box-shadow: 0 0 0 3px rgba(19,169,200,.13);
+}
+
+.input-wrapper input::placeholder {
+  color: #8c96aa;
+}
+
+.mub-page.dark .input-wrapper input {
+  background: rgba(255,255,255,.04);
+  color: #fff;
+  border-color: rgba(255,255,255,.22);
+}
+
+.field-icon {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 16px;
+  transform: translateY(-50%);
+  z-index: 2;
+  font-size: 17px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 10px;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.login-options {
+  margin: 13px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.remember-option {
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: 800 !important;
+}
+
+.remember-option input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--blue);
+}
+
+.forgot-password {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.login-button {
+  width: 100%;
+  height: 56px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--gradient);
+  color: #fff;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 32px rgba(45,115,198,.28);
+}
+
+#login_error {
+  margin-top: 10px;
+  color: #d93025;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.contact-card {
+  padding: 18px;
+}
+
+.contact-card h3 {
+  margin: 0 0 12px;
+  text-align: center;
+  font-size: 21px;
+}
+
+.contact-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.contact-links a {
+  min-width: 0;
+  padding: 8px;
+  border-radius: 18px;
+  color: var(--text);
+  text-align: center;
+  text-decoration: none;
+  transition: transform .25s ease, background .25s ease;
+}
+
+.contact-links a:hover {
+  transform: translateY(-5px);
+  background: var(--soft-gradient);
+}
+
+.contact-links span {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 7px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--soft-gradient);
+}
+
+.contact-links b {
+  display: block;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.contact-links small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+  grid-template-areas: "visual copy";
+  align-items: center;
+  gap: clamp(26px, 4vw, 58px);
+}
+
+.mub-page.en .hero-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+  grid-template-areas: "copy visual";
+}
+
+.hero-copy {
+  grid-area: copy;
+  min-width: 0;
+  text-align: start;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 1px solid rgba(19,169,200,.42);
+  border-radius: 999px;
+  background: rgba(19,169,200,.08);
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.hero-title {
+  margin: 15px 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 .35em;
+  color: var(--text);
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.hero-description {
+  max-width: 650px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.85;
+}
+
+.erp-visual {
+  grid-area: visual;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.erp-window {
+  width: min(100%, 410px);
+  height: 245px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  background: rgba(255,255,255,.86);
+  box-shadow: 0 24px 50px rgba(25,57,111,.15);
+  transform: rotate(-2deg);
+  animation: erpFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes erpFloat {
+  from { transform: translateY(0) rotate(-2deg); }
+  to { transform: translateY(-12px) rotate(-1deg); }
+}
+
+.mub-page.dark .erp-window {
+  background: rgba(255,255,255,.06);
+}
+
+.erp-header {
+  height: 38px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.erp-header span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.erp-header span:nth-child(1) { background: var(--purple); }
+.erp-header span:nth-child(2) { background: var(--blue); }
+.erp-header span:nth-child(3) { background: var(--cyan); }
+
+.erp-header b {
+  margin-inline-start: auto;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.erp-body {
+  height: calc(100% - 38px);
+  display: grid;
+  grid-template-columns: 56px 1fr;
+}
+
+.erp-sidebar {
+  border-inline-end: 1px solid var(--border);
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+}
+
+.erp-sidebar i {
+  width: 24px;
+  height: 24px;
+  border-radius: 9px;
+  background: var(--gradient);
+  animation: menuPulse 2s ease-in-out infinite alternate;
+}
+
+.erp-sidebar i:nth-child(2) { animation-delay: .2s; }
+.erp-sidebar i:nth-child(3) { animation-delay: .4s; }
+.erp-sidebar i:nth-child(4) { animation-delay: .6s; }
+
+@keyframes menuPulse {
+  to {
+    opacity: .65;
+    transform: translateX(4px);
+  }
+}
+
+.erp-content {
+  min-width: 0;
+  padding: 14px;
+}
+
+.erp-topbar {
+  height: 18px;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(116,69,186,.16), rgba(19,169,200,.12));
+}
+
+.erp-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.erp-cards div {
+  min-width: 0;
+  padding: 8px;
+  border-radius: 13px;
+  background: rgba(45,115,198,.08);
+  text-align: center;
+}
+
+.erp-cards small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.erp-cards b {
+  display: block;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.erp-chart {
+  height: 78px;
+  margin-top: 13px;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--soft-gradient);
+  display: flex;
+  align-items: flex-end;
+  gap: 9px;
+}
+
+.erp-chart span {
+  flex: 1;
+  border-radius: 9px 9px 0 0;
+  background: var(--gradient);
+  animation: chartMove 1.7s ease-in-out infinite alternate;
+}
+
+.erp-chart span:nth-child(1) { height: 35%; }
+.erp-chart span:nth-child(2) { height: 58%; animation-delay: .1s; }
+.erp-chart span:nth-child(3) { height: 75%; animation-delay: .2s; }
+.erp-chart span:nth-child(4) { height: 45%; animation-delay: .3s; }
+.erp-chart span:nth-child(5) { height: 67%; animation-delay: .4s; }
+.erp-chart span:nth-child(6) { height: 52%; animation-delay: .5s; }
+
+@keyframes chartMove {
+  to {
+    transform: scaleY(.72);
+    opacity: .75;
+  }
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.features article {
+  padding: 18px 14px;
+  text-align: center;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+.features article:hover,
+.stats .stat-item:hover,
+.compatible:hover,
+.social:hover {
+  transform: translateY(-8px) scale(1.015);
+  border-color: rgba(19,169,200,.45);
+  box-shadow: 0 24px 45px rgba(25,57,111,.16);
+}
+
+.features article > div {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 10px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: var(--soft-gradient);
+  font-size: 23px;
+}
+
+.features h3 {
+  margin: 0 0 7px;
+  font-size: 16px;
+}
+
+.features p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.stats {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stat-item {
+  min-height: 112px;
+  padding: 16px;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  place-items: center;
+  text-align: center;
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(248,251,255,.92));
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+.mub-page.dark .stat-item {
+  background: rgba(255,255,255,.045);
+}
+
+.stat-item span {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 8px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: var(--soft-gradient);
+  font-size: 22px;
+}
+
+.stat-item b {
+  display: block;
+  color: var(--blue);
+  font-size: 23px;
+  line-height: 1.2;
+}
+
+.stat-item small {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.compatible,
+.social {
+  padding: 18px;
+  text-align: center;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+.compatible h3,
+.social h3 {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+
+.compatible-logos {
+  min-height: 46px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+.compatible-logos img {
+  max-width: 150px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.social-icons a {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--panel2);
+  box-shadow: 0 10px 24px rgba(0,0,0,.09);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-7px) rotate(6deg) scale(1.08);
+  box-shadow: 0 18px 34px rgba(0,0,0,.18);
+}
+
+.social-icons svg {
+  width: 23px;
+  height: 23px;
+}
+
+.social strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--blue);
+  font-size: 15px;
+}
+
+.copyright {
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+}
+
+@media (max-width: 1180px) {
+  .mub-page,
+  .mub-page.en {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "login"
+      "info";
+  }
+
+  .login-side {
+    min-height: auto;
+    border: 0 !important;
+  }
+
+  .info-side {
+    padding: 18px;
+  }
+
+  .hero-layout,
+  .mub-page.en .hero-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "visual";
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .hero-title {
+    justify-content: center;
+    font-size: clamp(32px, 5vw, 44px);
+  }
+
+  .hero-description {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .features,
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .erp-window {
+    width: min(100%, 380px);
+    height: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-side,
+  .info-side {
+    padding: 10px;
+  }
+
+  .toolbar-card {
+    justify-content: center;
+  }
+
+  .contact-card {
+    display: none;
+  }
+
+  .features,
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .login-options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .erp-window {
+    width: 100%;
+    height: 200px;
+    transform: none;
+  }
+
+  .erp-body {
+    grid-template-columns: 46px 1fr;
+  }
+
+  .erp-cards b {
+    font-size: 12px;
+  }
+
+  .erp-chart {
+    height: 68px;
+  }
+}
+</style>
+
+<script>
+let currentLang = localStorage.getItem("mub_lang") || "ar";
+let currentTheme = localStorage.getItem("mub_theme") || "light";
+
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem("mub_lang", lang);
+
+  const page = document.getElementById("mubPage");
+  const langBtn = document.getElementById("langBtn");
+  const userInput = document.getElementById("login_user");
+  const passInput = document.getElementById("login_password");
+
+  page.classList.toggle("en", lang === "en");
+
+  document.documentElement.setAttribute("lang", lang);
+  document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+  document.querySelectorAll("[data-ar][data-en]").forEach(function(el) {
+    el.textContent = lang === "ar" ? el.dataset.ar : el.dataset.en;
+  });
+
+  langBtn.textContent = lang === "ar" ? "English" : "العربية";
+
+  userInput.placeholder = lang === "ar"
+    ? "أدخل رقم الجوال أو اسم المستخدم"
+    : "Enter mobile number or username";
+
+  passInput.placeholder = lang === "ar"
+    ? "أدخل كلمة المرور"
+    : "Enter password";
+}
+
+function toggleLang() {
+  applyLang(currentLang === "ar" ? "en" : "ar");
+}
+
+function applyTheme(theme) {
+  currentTheme = theme;
+  localStorage.setItem("mub_theme", theme);
+
+  document.getElementById("mubPage").classList.toggle("dark", theme === "dark");
+  document.getElementById("themeBtn").textContent = theme === "dark" ? "☀️" : "🌙";
+}
+
+function toggleTheme() {
+  applyTheme(currentTheme === "dark" ? "light" : "dark");
+}
+
+function togglePassword() {
+  const input = document.getElementById("login_password");
+  const btn = document.getElementById("passwordToggle");
+
+  input.type = input.type === "password" ? "text" : "password";
+  btn.textContent = input.type === "password" ? "👁" : "🙈";
+}
+
+function loadRememberedCredentials() {
+  const remember = localStorage.getItem("mub_remember") === "1";
+  document.getElementById("rememberMe").checked = remember;
+
+  if (remember) {
+    document.getElementById("login_user").value = localStorage.getItem("mub_saved_user") || "";
+    document.getElementById("login_password").value = localStorage.getItem("mub_saved_password") || "";
+  }
+}
+
+function updateRememberedCredentials() {
+  const remember = document.getElementById("rememberMe").checked;
+
+  if (remember) {
+    localStorage.setItem("mub_remember", "1");
+    localStorage.setItem("mub_saved_user", document.getElementById("login_user").value || "");
+    localStorage.setItem("mub_saved_password", document.getElementById("login_password").value || "");
+  } else {
+    localStorage.removeItem("mub_remember");
+    localStorage.removeItem("mub_saved_user");
+    localStorage.removeItem("mub_saved_password");
+  }
+}
+
+document.getElementById("rememberMe").addEventListener("change", updateRememberedCredentials);
+
+document.getElementById("login_form").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const usr = document.getElementById("login_user").value.trim();
+  const pwd = document.getElementById("login_password").value;
+  const errorBox = document.getElementById("login_error");
+  const submitButton = document.querySelector(".login-button");
+
+  errorBox.textContent = "";
+
+  if (!usr || !pwd) {
+    errorBox.textContent = currentLang === "ar"
+      ? "يرجى إدخال اسم المستخدم وكلمة المرور"
+      : "Please enter your username and password";
+    return;
+  }
+
+  updateRememberedCredentials();
+  submitButton.disabled = true;
+
+  try {
+    const response = await fetch("/api/method/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ usr: usr, pwd: pwd })
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.message === "Logged In") {
+      const params = new URLSearchParams(window.location.search);
+      window.location.href = params.get("redirect-to") || "/app";
+      return;
+    }
+
+    errorBox.textContent = currentLang === "ar"
+      ? "بيانات الدخول غير صحيحة"
+      : "Invalid login details";
+
+  } catch (error) {
+    errorBox.textContent = currentLang === "ar"
+      ? "تعذر الاتصال بالخادم، حاول مرة أخرى"
+      : "Could not connect to the server. Please try again";
+  } finally {
+    submitButton.disabled = false;
+  }
+});
+
+applyTheme(currentTheme);
+applyLang(currentLang);
+loadRememberedCredentials();
+</script>
+
+{% endblock %}
