@@ -181,11 +181,27 @@
             <div class="erp-content">
               <div class="erp-topbar"></div>
 
-              <div class="erp-cards">
-                <div><small>Sales Invoice</small><b>60,540</b></div>
-                <div><small>Stock Balance</small><b>47,250</b></div>
-                <div><small>Net Profit</small><b>13,290</b></div>
-              </div>
+             <div class="erp-cards">
+
+  <!-- المبيعات -->
+  <div>
+    <small data-ar="المبيعات" data-en="Sales">المبيعات</small>
+    <b>60,540</b>
+  </div>
+
+  <!-- التكاليف -->
+  <div>
+    <small data-ar="التكاليف" data-en="Costs">التكاليف</small>
+    <b>47,250</b>
+  </div>
+
+  <!-- الأرباح -->
+  <div>
+    <small data-ar="الأرباح" data-en="Profits">الأرباح</small>
+    <b>13,290</b>
+  </div>
+
+</div>
 
               <div class="erp-chart">
                 <span></span><span></span><span></span><span></span><span></span><span></span>
@@ -921,7 +937,7 @@ main .container,
 
 .site-link {
   display: inline-block; margin-top: 10px; color: var(--link); font-size: 15px; font-weight: 900;
-  text-decoration: none;
+  text-decoration: none; text-align: center;
 }
 
 .site-link:hover {
