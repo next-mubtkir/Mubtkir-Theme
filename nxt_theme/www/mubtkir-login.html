@@ -132,11 +132,22 @@
             <div class="erp-content">
               <div class="erp-topbar"></div>
 
-              <div class="erp-cards">
-                <div><small>Sales Invoice</small><b>60,540</b></div>
-                <div><small>Stock Balance</small><b>47,250</b></div>
-                <div><small>Net Profit</small><b>13,290</b></div>
-              </div>
+           <div class="erp-cards">
+  <div>
+    <small data-ar="المبيعات" data-en="Sales">المبيعات</small>
+    <b>60,540</b>
+  </div>
+
+  <div>
+    <small data-ar="التكاليف" data-en="Costs">التكاليف</small>
+    <b>47,250</b>
+  </div>
+
+  <div>
+    <small data-ar="الأرباح" data-en="Profits">الأرباح</small>
+    <b>13,290</b>
+  </div>
+</div>
 
               <div class="erp-chart">
                 <span></span><span></span><span></span><span></span><span></span><span></span>
@@ -1003,12 +1014,12 @@ main .container,
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 70px;
+  gap: 28px;
 }
 
 .compatible-logos img {
-  max-width: 180px;
-  height: 58px;
+  max-width: 135px;
+  height: 46px;
   object-fit: contain;
   animation: logoFloat 3s ease-in-out infinite alternate;
 }
