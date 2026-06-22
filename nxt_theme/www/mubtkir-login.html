@@ -1184,6 +1184,97 @@ main .container,
     height: 44px;
   }
 }
+  /* =========================================================
+   إصلاح وضوح النصوص في الوضع الليلي
+========================================================= */
+
+.mub-page.dark {
+  --text: #ffffff;
+  --muted: #dbe7fb;
+  --panel: rgba(9, 25, 50, 0.86);
+  --panel2: rgba(12, 34, 66, 0.88);
+  --border: rgba(100, 190, 255, 0.28);
+}
+
+.mub-page.dark .login-card,
+.mub-page.dark .contact-card,
+.mub-page.dark .features article,
+.mub-page.dark .stats,
+.mub-page.dark .compatible,
+.mub-page.dark .social {
+  background: rgba(9, 25, 50, 0.86) !important;
+  border-color: rgba(100, 190, 255, 0.28) !important;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.38);
+}
+
+.mub-page.dark h1,
+.mub-page.dark h2,
+.mub-page.dark h3,
+.mub-page.dark label,
+.mub-page.dark .hero-title,
+.mub-page.dark .welcome-title,
+.mub-page.dark .features h3,
+.mub-page.dark .compatible h3,
+.mub-page.dark .social h3,
+.mub-page.dark .contact-card h3,
+.mub-page.dark .login-brand strong {
+  color: #ffffff !important;
+}
+
+.mub-page.dark p,
+.mub-page.dark small,
+.mub-page.dark .hero-description,
+.mub-page.dark .welcome-description,
+.mub-page.dark .features p,
+.mub-page.dark .stat-item small,
+.mub-page.dark .contact-links small,
+.mub-page.dark .erp-cards small {
+  color: #dbe7fb !important;
+}
+
+.mub-page.dark .features article > div,
+.mub-page.dark .stat-item span,
+.mub-page.dark .contact-links span {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.mub-page.dark .stat-item {
+  background: rgba(255, 255, 255, 0.055) !important;
+}
+
+.mub-page.dark .stat-item b,
+.mub-page.dark .site-link,
+.mub-page.dark .forgot-password {
+  color: #58c9ff !important;
+}
+
+.mub-page.dark .input-wrapper input {
+  background: rgba(255, 255, 255, 0.055) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+}
+
+.mub-page.dark .input-wrapper input::placeholder {
+  color: rgba(255, 255, 255, 0.64) !important;
+}
+
+.mub-page.dark .field-icon,
+.mub-page.dark .password-toggle {
+  color: #ffffff !important;
+}
+
+.mub-page.dark .compatible-logos img {
+  filter: brightness(1.25) contrast(1.08);
+}
+
+.mub-page.dark .social-icons a {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+.mub-page.dark .copyright {
+  color: #c7d6ee !important;
+}
 </style>
 
 <script>
