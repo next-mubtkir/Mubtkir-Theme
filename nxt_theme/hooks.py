@@ -16,7 +16,9 @@ website_context = {
 # Includes in <head>
 # ------------------
 
-
+# include js, css files in header of desk.html 
+app_include_css = ["nxt_theme.bundle.css"] 
+app_include_js = ["nxt_theme.bundle.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/nxt_theme/css/nxt_theme.css"
