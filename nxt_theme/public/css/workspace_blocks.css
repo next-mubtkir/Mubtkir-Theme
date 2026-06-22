@@ -1,1 +1,187 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
 
+/* =========================
+   Wrapper + Background
+========================= */
+.erp-dashboard-wrapper {
+  position: relative;
+  padding: 10px;
+}
+/* =========================
+   RTL Layout (except images)
+========================= */
+.erp-dashboard-wrapper {
+  direction: rtl;
+  text-align: right;
+}
+
+
+.erp-bg-logo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.05;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   Dashboard Header
+========================= */
+/* =========================
+   Dashboard Header (Centered & Large Logo)
+========================= */
+.erp-dashboard-header {
+  display: flex;
+  justify-content: center;   /* توسيط أفقي */
+  align-items: center;
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.erp-dashboard-logo {
+  width: 300px;   /* حجم اللوقو – عدله حسب رغبتك */
+  height: auto;
+}
+
+
+
+
+/* =========================
+   Dashboard Grid
+========================= */
+.erp-dashboard {
+  position: relative;
+  z-index: 1;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 22px;
+  margin-top: 14px;
+}
+
+.erp-dashboard,
+.erp-dashboard * {
+  font-family: 'Tajawal', 'Inter', system-ui, sans-serif !important;
+}
+
+/* =========================
+   Section Title
+========================= */
+.erp-section {
+  grid-column: 1 / -1;
+  font-size: 15px;
+  font-weight: 800;
+  margin: 20px 0 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+
+  text-align: right;   /* ⬅️ محاذاة لليمين */
+  direction: rtl;      /* ⬅️ اتجاه عربي */
+}
+
+
+/* =========================
+   Card Base
+========================= */
+.erp-card {
+  position: relative;
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  transition: transform .35s cubic-bezier(.4,0,.2,1),
+              box-shadow .35s cubic-bezier(.4,0,.2,1);
+}
+
+.erp-card:hover {
+  transform: translateY(-8px) scale(1.035);
+  box-shadow: 0 22px 48px rgba(0,0,0,.16);
+}
+
+.erp-card::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity .35s;
+  z-index:0;
+}
+
+.erp-card:hover::before { opacity:1; }
+
+.erp-card > * {
+  position:relative;
+  z-index:1;
+}
+
+.erp-card-header {
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.erp-icon {
+  font-size:30px;
+}
+
+.erp-title {
+  font-size:16px;
+  font-weight:800;
+  
+}
+
+.erp-desc {
+  margin-top:10px;
+  font-size:13px;
+  line-height:1.7;
+  color:#6b7280;
+}
+
+.erp-footer {
+  margin-top:18px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.erp-card::after {
+  content:"";
+  position:absolute;
+  bottom:0;
+  right:0;
+  height:4px;
+  width:0;
+  transition:width .4s;
+}
+
+.erp-card:hover::after { width:100%; }
+
+/* Hover colors */
+.blue::before{background:#f0f6ff;}
+.green::before{background:#f0fdf4;}
+.orange::before{background:#fff7ed;}
+.red::before{background:#fef2f2;}
+.purple::before{background:#faf5ff;}
+
+.blue::after{background:#2563eb;}
+.green::after{background:#16a34a;}
+.orange::after{background:#ea580c;}
+.red::after{background:#dc2626;}
+.purple::after{background:#7c3aed;}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width:1024px){
+  .erp-dashboard{grid-template-columns:repeat(2,1fr)!important;}
+}
+@media (max-width:640px){
+  .erp-dashboard{grid-template-columns:1fr!important;}
+  .erp-bg-logo{display:none;}
+}
+</style>
