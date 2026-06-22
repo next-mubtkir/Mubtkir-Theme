@@ -241,3 +241,11 @@ website_route_rules = [
 app_include_css = [
     "/assets/nxt_theme/css/workspace_blocks.css"
 ]
+fixtures = [
+    {
+        "dt": "Custom HTML Block"
+    },
+    {
+        "dt": "Workspace"
+    }
+]
