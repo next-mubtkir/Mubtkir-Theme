@@ -1,8 +1,8 @@
 app_name = "nxt_theme"
-app_title = "NXT Theme"
-app_publisher = "NexTash (SMC-PVT) Ltd"
+app_title = "Mubtkir Theme"
+app_publisher = "MUBTKIR ERP"
 app_description = "Enhanced User Interface and User Experience for Frappe Applications"
-app_email = "support@nextash.com"
+app_email = "support@mubtkir.com"
 app_license = "gpl-2.0"
 # required_apps = []
 
@@ -237,4 +237,7 @@ doctype_js = {
 # }
 website_route_rules = [
     {"from_route": "/login", "to_route": "mubtkir-login"}
+]
+app_include_css = [
+    "/assets/nxt_theme/css/workspace_blocks.css"
 ]
