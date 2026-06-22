@@ -389,10 +389,18 @@ main .container,
   display: flex;
   flex-direction: column;
   gap: 18px;
+  position: relative;
+  overflow: hidden;
+  background-image: url("/assets/nxt_theme/images/login-bg-light.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.mub-page.en .info-side {
-  direction: ltr;
+.mub-page.dark .info-side {
+  background-image: url("/assets/nxt_theme/images/login-bg-dark.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .toolbar-card {
