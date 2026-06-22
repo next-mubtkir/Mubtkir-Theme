@@ -16,7 +16,7 @@
     <div class="login-card">
 
       <div class="login-brand">
-        <img src="/assets/mu_theme/images/mubtkir-logo.png" alt="MUBTKIR ERP" onerror="this.style.display='none'">
+        <img src="/assets/nxt_theme/images/mubtkir-logo.png" alt="MUBTKIR ERP">
         <strong>MUBTKIR <span>ERP</span></strong>
       </div>
 
@@ -212,9 +212,9 @@
       <h3 data-ar="متوافق مع" data-en="Compatible with">متوافق مع</h3>
 
       <div class="compatible-logos">
-        <img src="/assets/mu_theme/images/zatca-logo.png" alt="ZATCA" onerror="this.style.display='none'">
-        <img src="/assets/mu_theme/images/fatoora-logo.png" alt="Fatoora" onerror="this.style.display='none'">
-        <img src="/assets/mu_theme/images/saudi_business.png" alt="Saudi Business" onerror="this.style.display='none'">
+        <img src="/assets/nxt_theme/images/zatca-logo.png" alt="ZATCA">
+        <img src="/assets/nxt_theme/images/fatoora-logo.png" alt="Fatoora">
+        <img src="/assets/nxt_theme/images/saudi_business.png" alt="Saudi Business">
       </div>
     </div>
 
@@ -274,7 +274,9 @@
 
       </div>
 
-      <strong>www.mubtkir.com</strong>
+      <a class="site-link" href="https://www.mubtkir.com" target="_blank" rel="noopener noreferrer">
+        www.mubtkir.com
+      </a>
     </div>
 
     <div class="copyright">© 2026 MUBTKIR ERP</div>
@@ -971,6 +973,10 @@ main .container,
   transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
 
+.compatible {
+  min-height: 155px;
+}
+
 .compatible h3,
 .social h3 {
   margin: 0 0 12px;
@@ -978,18 +984,37 @@ main .container,
 }
 
 .compatible-logos {
-  min-height: 46px;
+  min-height: 70px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  gap: 34px;
 }
 
 .compatible-logos img {
-  max-width: 150px;
-  height: 44px;
+  max-width: 165px;
+  height: 52px;
   object-fit: contain;
+  animation: logoFloat 3s ease-in-out infinite alternate;
+}
+
+.compatible-logos img:nth-child(2) {
+  animation-delay: .25s;
+}
+
+.compatible-logos img:nth-child(3) {
+  animation-delay: .5s;
+}
+
+@keyframes logoFloat {
+  from {
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    transform: translateY(-7px) scale(1.04);
+  }
 }
 
 .social-icons {
@@ -1021,11 +1046,17 @@ main .container,
   height: 23px;
 }
 
-.social strong {
-  display: block;
+.site-link {
+  display: inline-block;
   margin-top: 10px;
   color: var(--blue);
   font-size: 15px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.site-link:hover {
+  text-decoration: underline;
 }
 
 .copyright {
@@ -1134,6 +1165,15 @@ main .container,
 
   .erp-chart {
     height: 68px;
+  }
+
+  .compatible-logos {
+    gap: 18px;
+  }
+
+  .compatible-logos img {
+    max-width: 130px;
+    height: 44px;
   }
 }
 </style>
