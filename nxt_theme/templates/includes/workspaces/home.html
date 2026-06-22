@@ -1,0 +1,233 @@
+<div class="erp-dashboard-wrapper">
+
+  <!-- خلفية الداشبورد -->
+  <img src="/assets/nxt_theme/images/mubtkir-logo.png" class="erp-bg-logo">
+
+  <!-- هيدر الداشبورد -->
+  <div class="erp-dashboard-header">
+    <img src="/assets/nxt_theme/images/mubtkir-logo.png" class="erp-dashboard-logo">
+  </div>
+
+  <!-- =========================
+       Dashboard
+  ========================= -->
+  <div class="erp-dashboard">
+
+    <!-- ===================== -->
+    <!-- 🟦 المبيعات -->
+    <!-- ===================== -->
+    <div class="erp-section">المبيعات</div>
+
+    <div class="erp-card blue"
+      onclick="frappe.set_route('List','Sales Invoice')">
+      <div class="erp-card-header">
+        <div class="erp-icon">🧾</div>
+        <div class="erp-title">فاتورة مبيعات</div>
+      </div>
+      <div class="erp-desc">
+        إنشاء فواتير مبيعات، احتساب الضريبة، وربطها بالعملاء والمستودعات.
+      </div>
+      <div class="erp-footer">➜ إنشاء فاتورة</div>
+    </div>
+
+    <div class="erp-card blue"
+         onclick="frappe.set_route('List','Sales Order')">
+      <div class="erp-card-header">
+        <div class="erp-icon">🛒</div>
+        <div class="erp-title">طلبات البيع</div>
+      </div>
+      <div class="erp-desc">
+        إدارة طلبات العملاء، الموافقات، والتحويل إلى فواتير.
+      </div>
+      <div class="erp-footer">➜ عرض الطلبات</div>
+    </div>
+
+    <div class="erp-card blue"
+         onclick="frappe.set_route('List','Quotation')">
+      <div class="erp-card-header">
+        <div class="erp-icon">📄</div>
+        <div class="erp-title">عروض الأسعار</div>
+      </div>
+      <div class="erp-desc">
+        إعداد عروض الأسعار ومتابعة حالتها حتى اعتمادها.
+      </div>
+      <div class="erp-footer">➜ إدارة العروض</div>
+    </div>
+
+    <!-- ===================== -->
+    <!-- 🟩 المشتريات -->
+    <!-- ===================== -->
+    <div class="erp-section">المشتريات</div>
+
+    <div class="erp-card green"
+         onclick="frappe.set_route('List','Purchase Invoice')">
+      <div class="erp-card-header">
+        <div class="erp-icon">🧾</div>
+        <div class="erp-title">فواتير الشراء</div>
+      </div>
+      <div class="erp-desc">
+        تسجيل فواتير الموردين وربطها بالحسابات والضرائب.
+      </div>
+      <div class="erp-footer">➜ عرض الفواتير</div>
+    </div>
+
+    <div class="erp-card green"
+         onclick="frappe.set_route('List','Purchase Order')">
+      <div class="erp-card-header">
+        <div class="erp-icon">📑</div>
+        <div class="erp-title">أوامر الشراء</div>
+      </div>
+      <div class="erp-desc">
+        إنشاء أوامر شراء ومتابعة التوريد من الموردين.
+      </div>
+      <div class="erp-footer">➜ أوامر الشراء</div>
+    </div>
+
+    <div class="erp-card green"
+         onclick="frappe.set_route('List','Supplier')">
+      <div class="erp-card-header">
+        <div class="erp-icon">🏭</div>
+        <div class="erp-title">الموردون</div>
+      </div>
+      <div class="erp-desc">
+        إدارة بيانات الموردين، الأرصدة، وسجل التعاملات.
+      </div>
+      <div class="erp-footer">➜ إدارة الموردين</div>
+    </div>
+
+    <!-- ===================== -->
+    <!-- 🟧 المخزون -->
+    <!-- ===================== -->
+    <div class="erp-section">المخزون</div>
+
+    <div class="erp-card orange"
+         onclick="frappe.set_route('List','Item')">
+      <div class="erp-card-header">
+        <div class="erp-icon">📦</div>
+        <div class="erp-title">الأصناف</div>
+      </div>
+      <div class="erp-desc">
+        إدارة الأصناف والخدمات وربطها بالمستودعات.
+      </div>
+      <div class="erp-footer">➜ إدارة الأصناف</div>
+    </div>
+
+    <div class="erp-card orange"
+         onclick="frappe.set_route('List','Warehouse')">
+      <div class="erp-card-header">
+        <div class="erp-icon">🏬</div>
+        <div class="erp-title">المستودعات</div>
+      </div>
+      <div class="erp-desc">
+        تعريف المستودعات ومتابعة الكميات المتاحة.
+      </div>
+      <div class="erp-footer">➜ عرض المستودعات</div>
+    </div>
+
+    <div class="erp-card orange"
+         onclick="frappe.set_route('List','Stock Entry')">
+      <div class="erp-card-header">
+        <div class="erp-icon">🔄</div>
+        <div class="erp-title">حركات المخزون</div>
+      </div>
+      <div class="erp-desc">
+        التحويلات، التسويات، والإنتاج داخل المخزون.
+      </div>
+      <div class="erp-footer">➜ الحركات</div>
+    </div>
+
+    <!-- ===================== -->
+    <!-- 🟥 المحاسبة -->
+    <!-- ===================== -->
+    <div class="erp-section">المحاسبة</div>
+
+    <div class="erp-card red"
+         onclick="frappe.set_route('List','Vouchers Entry')">
+      <div class="erp-card-header">
+        <div class="erp-icon">💳</div>
+        <div class="erp-title">المدفوعات</div>
+      </div>
+      <div class="erp-desc">
+        تسجيل القبض والصرف وربطها بالحسابات.
+      </div>
+      <div class="erp-footer">➜ القيود النقدية</div>
+    </div>
+
+    <div class="erp-card red"
+         onclick="frappe.set_route('List','Journal Entry')">
+      <div class="erp-card-header">
+        <div class="erp-icon">📘</div>
+        <div class="erp-title">قيود اليومية</div>
+      </div>
+      <div class="erp-desc">
+        إدخال القيود المحاسبية والتسويات.
+      </div>
+      <div class="erp-footer">➜ اليومية</div>
+    </div>
+
+    <div class="erp-card red"
+         onclick="frappe.set_route('Tree','Account')">
+      <div class="erp-card-header">
+        <div class="erp-icon">🧮</div>
+        <div class="erp-title">دليل الحسابات</div>
+      </div>
+      <div class="erp-desc">
+        إدارة شجرة الحسابات وربطها بالحركات.
+      </div>
+      <div class="erp-footer">➜ الحسابات</div>
+    </div>
+
+    <!-- ===================== -->
+    <!-- 🟪 التقارير -->
+    <!-- ===================== -->
+    <div class="erp-section">التقارير</div>
+
+    <div class="erp-card purple"
+         onclick="frappe.set_route('query-report','Sales Register')">
+      <div class="erp-card-header">
+        <div class="erp-icon">📊</div>
+        <div class="erp-title">تقارير المبيعات</div>
+      </div>
+      <div class="erp-desc">
+        تحليل المبيعات حسب الفترة أو العميل.
+      </div>
+      <div class="erp-footer">➜ عرض التقرير</div>
+    </div>
+
+    <div class="erp-card purple"
+         onclick="frappe.set_route('query-report','General Ledger')">
+      <div class="erp-card-header">
+        <div class="erp-icon">📈</div>
+        <div class="erp-title">دفتر الأستاذ</div>
+      </div>
+      <div class="erp-desc">
+        عرض القيود والحركات المحاسبية التفصيلية.
+      </div>
+      <div class="erp-footer">➜ الأستاذ العام</div>
+    </div>
+
+    <div class="erp-card purple"
+         onclick="frappe.set_route('query-report','Profit and Loss Statement')">
+      <div class="erp-card-header">
+        <div class="erp-icon">📉</div>
+        <div class="erp-title">الأرباح والخسائر</div>
+      </div>
+      <div class="erp-desc">
+        تحليل الربحية والأداء المالي.
+      </div>
+      <div class="erp-footer">➜ التقرير المالي</div>
+    </div>
+     <div class="erp-card purple"
+         onclick="frappe.set_route('query-report','Tax Report')">
+      <div class="erp-card-header">
+        <div class="erp-icon">📉</div>
+        <div class="erp-title">الاقرار الضريبي</div>
+      </div>
+      <div class="erp-desc">
+        تقرير الضريبة مفصل/ملخص
+      </div>
+      <div class="erp-footer">➜ الاقرار الضريبي</div>
+    </div>
+
+  </div>
+</div>
