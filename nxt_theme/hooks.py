@@ -250,3 +250,9 @@ fixtures = [
     {"dt": "Custom HTML Block"},
     {"dt": "Workspace"}
 ]
+website_redirects = [
+    {
+        "source": "/forgot",
+        "target": "/mubtkir_forgot"
+    }
+]
