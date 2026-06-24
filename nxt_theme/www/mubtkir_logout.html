@@ -809,7 +809,54 @@ main .container,
     transform-origin: bottom left;
   }
 }
+.mub-logout-page.en {
+  direction: ltr;
+}
+
+.mub-logout-page.en .logout-main {
+  grid-template-areas: "card visual";
+}
+
+.mub-logout-page.en .header-brand,
+.mub-logout-page.en .logout-brand {
+  direction: ltr;
+}
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const frappeLang =
+    window.frappe?.boot?.lang ||
+    window.frappe?.boot?.user?.language ||
+    document.documentElement.lang ||
+    "ar";
+
+  const lang = String(frappeLang).toLowerCase().startsWith("ar")
+    ? "ar"
+    : "en";
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+  const page = document.getElementById("mubLogoutPage");
+
+  if (page) {
+    page.dir = lang === "ar" ? "rtl" : "ltr";
+    page.classList.toggle("en", lang === "en");
+  }
+
+  document.querySelectorAll("[data-ar][data-en]").forEach(function (element) {
+    element.textContent =
+      lang === "ar"
+        ? element.dataset.ar
+        : element.dataset.en;
+  });
+
+  document.title =
+    lang === "ar"
+      ? "تم تسجيل الخروج | MUBTKIR ERP"
+      : "Logged Out | MUBTKIR ERP";
+});
+</script>
   {% endblock %}
  </body>
 </html>
