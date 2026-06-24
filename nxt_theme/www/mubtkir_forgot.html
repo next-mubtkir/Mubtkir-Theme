@@ -1270,168 +1270,449 @@ main .container,
   }
 }
 </style>
-  <script>
-let currentLang = localStorage.getItem("mub_lang") || "ar";
-let currentTheme = localStorage.getItem("mub_theme") || "light";
+<script>
+(() => {
+  "use strict";
 
-function applyLang(lang) {
-  currentLang = lang;
-  localStorage.setItem("mub_lang", lang);
+  /*
+   * =========================================================
+   * 1) إعدادات اللغة والثيم
+   * =========================================================
+   */
+
+  const savedLanguage = localStorage.getItem("mub_lang");
+
+  const frappeLanguage =
+    window.frappe?.boot?.lang ||
+    window.frappe?.boot?.user?.language ||
+    document.documentElement.lang ||
+    "ar";
+
+  let currentLang =
+    savedLanguage ||
+    (String(frappeLanguage).toLowerCase().startsWith("ar") ? "ar" : "en");
+
+  let currentTheme =
+    localStorage.getItem("mub_theme") ||
+    document.documentElement.getAttribute("data-theme") ||
+    "light";
+
+
+  /*
+   * =========================================================
+   * 2) عناصر الصفحة
+   * =========================================================
+   */
 
   const page = document.getElementById("mubPage");
   const langBtn = document.getElementById("langBtn");
+  const themeBtn = document.getElementById("themeBtn");
+
+  const recoveryForm = document.getElementById("recovery_form");
   const recoveryInput = document.getElementById("recovery_user");
-
-  page.classList.toggle("en", lang === "en");
-
-  document.documentElement.setAttribute("lang", lang);
-  document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
-
-  document.querySelectorAll("[data-ar][data-en]").forEach(function(el) {
-    el.textContent = lang === "ar" ? el.dataset.ar : el.dataset.en;
-  });
-
-  langBtn.textContent = lang === "ar" ? "English" : "العربية";
-
-  recoveryInput.placeholder = lang === "ar"
-    ? "أدخل البريد الإلكتروني أو اسم المستخدم"
-    : "Enter email address or username";
-}
-
-function toggleLang() {
-  applyLang(currentLang === "ar" ? "en" : "ar");
-}
-
-function applyTheme(theme) {
-  currentTheme = theme;
-  localStorage.setItem("mub_theme", theme);
-
-  document.getElementById("mubPage").classList.toggle("dark", theme === "dark");
-  document.getElementById("themeBtn").textContent = theme === "dark" ? "☀️" : "🌙";
-}
-
-function toggleTheme() {
-  applyTheme(currentTheme === "dark" ? "light" : "dark");
-}
-
-function animateUsersCounter() {
-  const counter = document.getElementById("usersCounter");
-
-  if (!counter) {
-    return;
-  }
-
-  const target = parseInt(counter.dataset.target || "5000", 10);
-  const duration = 2400;
-  const startTime = performance.now();
-
-  function updateCounter(currentTime) {
-    const progress = Math.min((currentTime - startTime) / duration, 1);
-    const easedProgress = 1 - Math.pow(1 - progress, 3);
-    const value = Math.floor(easedProgress * target);
-
-    counter.textContent = value.toLocaleString();
-
-    if (progress < 1) {
-      requestAnimationFrame(updateCounter);
-    } else {
-      counter.textContent = target.toLocaleString();
-    }
-  }
-
-  requestAnimationFrame(updateCounter);
-}
-
-function getServerMessage(data) {
-  try {
-    if (data && data._server_messages) {
-      const messages = JSON.parse(data._server_messages);
-
-      if (Array.isArray(messages) && messages.length) {
-        const firstMessage = JSON.parse(messages[0]);
-        return firstMessage.message || "";
-      }
-    }
-  } catch (error) {
-    console.warn("Could not parse server message:", error);
-  }
-
-  return "";
-}
-
-document.getElementById("recovery_form").addEventListener("submit", async function(event) {
-  event.preventDefault();
-
-  const user = document.getElementById("recovery_user").value.trim();
   const messageBox = document.getElementById("recovery_message");
   const submitButton = document.querySelector(".recovery-button");
 
-  messageBox.textContent = "";
-  messageBox.className = "";
 
-  if (!user) {
-    messageBox.textContent = currentLang === "ar"
-      ? "يرجى إدخال البريد الإلكتروني أو اسم المستخدم"
-      : "Please enter your email address or username";
-    messageBox.classList.add("error");
-    return;
-  }
+  /*
+   * =========================================================
+   * 3) تطبيق اللغة
+   * =========================================================
+   */
 
-  submitButton.disabled = true;
+  function applyLang(lang) {
+    currentLang = lang === "en" ? "en" : "ar";
 
-  try {
-    const response = await fetch(
-      "/api/method/frappe.core.doctype.user.user.reset_password",
-      {
-        method: "POST",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "X-Frappe-CSRF-Token":
-            (window.frappe && window.frappe.csrf_token && window.frappe.csrf_token !== "None")
-              ? window.frappe.csrf_token
-              : ""
-        },
-        body: JSON.stringify({ user: user })
-      }
-    );
+    localStorage.setItem("mub_lang", currentLang);
 
-    const data = await response.json().catch(function() {
-      return {};
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+
+    if (page) {
+      page.classList.toggle("en", currentLang === "en");
+      page.setAttribute("dir", currentLang === "ar" ? "rtl" : "ltr");
+    }
+
+    document.querySelectorAll("[data-ar][data-en]").forEach((element) => {
+      element.textContent =
+        currentLang === "ar"
+          ? element.dataset.ar
+          : element.dataset.en;
     });
 
-    if (response.ok && !data.exception) {
-      messageBox.textContent = currentLang === "ar"
-        ? "تم إرسال رابط استعادة كلمة المرور. تحقق من بريدك الإلكتروني."
-        : "The password reset link has been sent. Please check your email.";
-      messageBox.classList.add("success");
-      document.getElementById("recovery_user").value = "";
+    if (langBtn) {
+      langBtn.textContent =
+        currentLang === "ar"
+          ? "English"
+          : "العربية";
+    }
+
+    if (recoveryInput) {
+      recoveryInput.placeholder =
+        currentLang === "ar"
+          ? "أدخل البريد الإلكتروني أو اسم المستخدم"
+          : "Enter email address or username";
+    }
+
+    document.title =
+      currentLang === "ar"
+        ? "استعادة كلمة المرور | MUBTKIR ERP"
+        : "Password Recovery | MUBTKIR ERP";
+  }
+
+
+  /*
+   * =========================================================
+   * 4) تبديل اللغة
+   * =========================================================
+   */
+
+  window.toggleLang = function () {
+    applyLang(currentLang === "ar" ? "en" : "ar");
+  };
+
+
+  /*
+   * =========================================================
+   * 5) تطبيق الثيم
+   * =========================================================
+   */
+
+  function applyTheme(theme) {
+    currentTheme = theme === "dark" ? "dark" : "light";
+
+    localStorage.setItem("mub_theme", currentTheme);
+
+    if (page) {
+      page.classList.toggle("dark", currentTheme === "dark");
+    }
+
+    if (themeBtn) {
+      themeBtn.textContent =
+        currentTheme === "dark"
+          ? "☀️"
+          : "🌙";
+
+      themeBtn.setAttribute(
+        "aria-label",
+        currentTheme === "dark"
+          ? "تفعيل الوضع النهاري"
+          : "تفعيل الوضع الليلي"
+      );
+    }
+  }
+
+
+  /*
+   * =========================================================
+   * 6) تبديل الثيم
+   * =========================================================
+   */
+
+  window.toggleTheme = function () {
+    applyTheme(currentTheme === "dark" ? "light" : "dark");
+  };
+
+
+  /*
+   * =========================================================
+   * 7) عداد المستخدمين
+   * =========================================================
+   */
+
+  function animateUsersCounter() {
+    const counter = document.getElementById("usersCounter");
+
+    if (!counter) {
       return;
     }
 
-    const serverMessage = getServerMessage(data);
-
-    messageBox.textContent = serverMessage || (
-      currentLang === "ar"
-        ? "تعذر إرسال رابط الاستعادة. تأكد من البيانات أو حاول لاحقاً."
-        : "Could not send the reset link. Check the details or try again later."
+    const target = Number.parseInt(
+      counter.dataset.target || "5000",
+      10
     );
-    messageBox.classList.add("error");
 
-  } catch (error) {
-    messageBox.textContent = currentLang === "ar"
-      ? "تعذر الاتصال بالخادم، حاول مرة أخرى"
-      : "Could not connect to the server. Please try again";
-    messageBox.classList.add("error");
-  } finally {
-    submitButton.disabled = false;
+    if (!Number.isFinite(target)) {
+      return;
+    }
+
+    const duration = 2400;
+    const startTime = performance.now();
+
+    function updateCounter(currentTime) {
+      const progress = Math.min(
+        (currentTime - startTime) / duration,
+        1
+      );
+
+      const easedProgress =
+        1 - Math.pow(1 - progress, 3);
+
+      const value = Math.floor(
+        easedProgress * target
+      );
+
+      counter.textContent = value.toLocaleString(
+        currentLang === "ar" ? "ar-SA" : "en-US"
+      );
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target.toLocaleString(
+          currentLang === "ar" ? "ar-SA" : "en-US"
+        );
+      }
+    }
+
+    requestAnimationFrame(updateCounter);
   }
-});
 
-applyTheme(currentTheme);
-applyLang(currentLang);
-animateUsersCounter();
+
+  /*
+   * =========================================================
+   * 8) استخراج رسالة الخطأ من Frappe
+   * =========================================================
+   */
+
+  function getServerMessage(data) {
+    try {
+      if (!data?._server_messages) {
+        return "";
+      }
+
+      const messages = JSON.parse(data._server_messages);
+
+      if (!Array.isArray(messages) || !messages.length) {
+        return "";
+      }
+
+      const firstMessage =
+        typeof messages[0] === "string"
+          ? JSON.parse(messages[0])
+          : messages[0];
+
+      return firstMessage?.message || "";
+
+    } catch (error) {
+      console.warn(
+        "Could not parse Frappe server message:",
+        error
+      );
+
+      return "";
+    }
+  }
+
+
+  /*
+   * =========================================================
+   * 9) عرض رسالة للمستخدم
+   * =========================================================
+   */
+
+  function showMessage(message, type) {
+    if (!messageBox) {
+      return;
+    }
+
+    messageBox.textContent = message;
+    messageBox.className = "";
+
+    if (type) {
+      messageBox.classList.add(type);
+    }
+  }
+
+
+  /*
+   * =========================================================
+   * 10) تغيير حالة زر الإرسال
+   * =========================================================
+   */
+
+  function setSubmitting(isSubmitting) {
+    if (!submitButton) {
+      return;
+    }
+
+    submitButton.disabled = isSubmitting;
+
+    const textElement = submitButton.querySelector(
+      "[data-ar][data-en]"
+    );
+
+    if (!textElement) {
+      return;
+    }
+
+    if (isSubmitting) {
+      textElement.textContent =
+        currentLang === "ar"
+          ? "جارٍ إرسال رابط الاستعادة..."
+          : "Sending reset link...";
+    } else {
+      textElement.textContent =
+        currentLang === "ar"
+          ? textElement.dataset.ar
+          : textElement.dataset.en;
+    }
+  }
+
+
+  /*
+   * =========================================================
+   * 11) طلب استعادة كلمة المرور
+   * =========================================================
+   */
+
+  async function submitPasswordRecovery(event) {
+    event.preventDefault();
+
+    if (
+      !recoveryInput ||
+      !messageBox ||
+      !submitButton
+    ) {
+      console.error(
+        "Password recovery form elements are missing."
+      );
+
+      return;
+    }
+
+    const userInput = recoveryInput.value.trim();
+
+    showMessage("", "");
+
+    if (!userInput) {
+      showMessage(
+        currentLang === "ar"
+          ? "يرجى إدخال البريد الإلكتروني أو اسم المستخدم"
+          : "Please enter your email address or username",
+        "error"
+      );
+
+      recoveryInput.focus();
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const csrfToken =
+        window.frappe?.csrf_token &&
+        window.frappe.csrf_token !== "None"
+          ? window.frappe.csrf_token
+          : "";
+
+      const headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      };
+
+      if (csrfToken) {
+        headers["X-Frappe-CSRF-Token"] = csrfToken;
+      }
+
+      const response = await fetch(
+        "/api/method/nxt_theme.api.password_reset.reset_password",
+        {
+          method: "POST",
+          credentials: "same-origin",
+          headers: headers,
+          body: JSON.stringify({
+            user_input: userInput
+          })
+        }
+      );
+
+      const data = await response.json().catch(() => {
+        return {};
+      });
+
+      /*
+       * استجابة Frappe تكون عادة:
+       * {
+       *   message: {
+       *     success: true,
+       *     message: "..."
+       *   }
+       * }
+       */
+      const result =
+        data?.message &&
+        typeof data.message === "object"
+          ? data.message
+          : {};
+
+      if (
+        response.ok &&
+        !data.exception &&
+        result.success === true
+      ) {
+        showMessage(
+          currentLang === "ar"
+            ? "إذا كانت البيانات صحيحة، فسيتم إرسال رابط الاستعادة إلى البريد الإلكتروني المسجل."
+            : "If the details are valid, a reset link will be sent to the registered email address.",
+          "success"
+        );
+
+        recoveryInput.value = "";
+        return;
+      }
+
+      const serverMessage =
+        result.message ||
+        getServerMessage(data);
+
+      showMessage(
+        serverMessage ||
+        (
+          currentLang === "ar"
+            ? "تعذر إرسال رابط الاستعادة. حاول مرة أخرى لاحقًا."
+            : "Could not send the reset link. Please try again later."
+        ),
+        "error"
+      );
+
+    } catch (error) {
+      console.error(
+        "Password recovery request failed:",
+        error
+      );
+
+      showMessage(
+        currentLang === "ar"
+          ? "تعذر الاتصال بالخادم، حاول مرة أخرى."
+          : "Could not connect to the server. Please try again.",
+        "error"
+      );
+
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+
+  /*
+   * =========================================================
+   * 12) تشغيل الصفحة
+   * =========================================================
+   */
+
+  if (recoveryForm) {
+    recoveryForm.addEventListener(
+      "submit",
+      submitPasswordRecovery
+    );
+  }
+
+  applyTheme(currentTheme);
+  applyLang(currentLang);
+  animateUsersCounter();
+
+})();
 </script>
   {% endblock %}
  </body>
