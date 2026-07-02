@@ -30,7 +30,7 @@ website_context = {
 # webform_include_css = {"doctype": "public/css/doctype.css"}
 
 # include js in page
-page_js = {"workspace" : "public/js/workspace_dashboard.bundle.js"}
+page_js = {"workspace" : "workspace_dashboard.bundle.js"}
 
 # include js in doctype views
 doctype_js = {
