@@ -978,13 +978,7 @@ main .container,
 (() => {
   "use strict";
 
-  const frappeLanguage =
-    window.frappe?.boot?.lang ||
-    window.frappe?.boot?.user?.language ||
-    document.documentElement.lang ||
-    "ar";
-
-  let currentLang = String(frappeLanguage).toLowerCase().startsWith("ar") ? "ar" : "en";
+  let currentLang = localStorage.getItem("mub_lang") || "ar";
 
   const page = document.getElementById("mubForgotPage");
   const recoveryForm = document.getElementById("recovery_form");
