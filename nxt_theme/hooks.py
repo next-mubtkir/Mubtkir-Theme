@@ -239,7 +239,8 @@ website_route_rules = [
 
 app_include_css = [
     "nxt_theme.bundle.css",
-    "/assets/nxt_theme/css/workspace_blocks.css"
+    "/assets/nxt_theme/css/workspace_blocks.css",
+    "/assets/nxt_theme/css/workspace_dashboard.css"
 ]
 
 app_include_js = [
